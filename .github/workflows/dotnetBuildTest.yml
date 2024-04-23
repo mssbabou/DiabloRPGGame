@@ -21,14 +21,14 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore /RPG_Game
+      run: dotnet restore RPG_Game/
     - name: Build
-      run: dotnet build /RPG_Game --no-restore
+      run: dotnet build RPG_Game/ --no-restore
     - name: Test
-      run: dotnet test /RPG_Game --no-build --verbosity normal
+      run: dotnet test RPG_Game/ --no-build --verbosity normal
     - name: Restore dependencies
-      run: dotnet restore /RPG_GameLogic
+      run: dotnet restore RPG_GameLogic/
     - name: Build
-      run: dotnet build /RPG_GameLogic --no-restore
+      run: dotnet build RPG_GameLogic/ --no-restore
     - name: Test
-      run: dotnet test /RPG_GameLogic --no-build --verbosity normal
+      run: dotnet test RPG_GameLogic/ --no-build --verbosity normal
