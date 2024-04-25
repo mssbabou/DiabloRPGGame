@@ -10,6 +10,8 @@ The project is divided into two main parts:
 
 2. `RPG_GameLogic`: This contains the game logic, including units, attacks, factories for creating units and attacks, and the game management logic. It's the heart of the game, where all the rules and mechanics are defined.
 
+![UML Diagram](RPGGAMEUML.drawio.png)
+
 ## Features
 
 - Multiple attack types: Choose from a variety of attack types to defeat your opponents.
