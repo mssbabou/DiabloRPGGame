@@ -4,10 +4,10 @@ namespace RPG_Game
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Game game = new();
-            game.Start();
+            await game.Start();
         }
     }
 }

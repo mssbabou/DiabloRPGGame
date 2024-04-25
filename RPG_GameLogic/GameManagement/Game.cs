@@ -1,12 +1,9 @@
-﻿using RPG_GameLogic.Attacks;
-using RPG_GameLogic.Factories;
-using RPG_GameLogic.Interfaces;
-using RPG_GameLogic.Units;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using RPG_GameLogic.Interfaces;
+using RPG_GameLogic.Factories;
+using RPG_GameLogic.Units;
+using System.Threading;
 
 namespace RPG_GameLogic.GameManagement
 {
@@ -18,7 +15,9 @@ namespace RPG_GameLogic.GameManagement
         private UnitFactory unitFactory;
         private AttackFactory attackFactory;
         private RandomAttackFactory randomAttackFactory;
-        
+
+        private readonly object lockObject = new();
+
         public Game()
         {
             unitFactory = new UnitFactory();
@@ -30,37 +29,58 @@ namespace RPG_GameLogic.GameManagement
             player = new Player();
         }
 
-        public void Start()
+        public async Task Start()
         {
             Console.Clear();
             string opponentString = GameConsole.SelectOptions("Choose your opponent!", ["FireEnemy", "WaterEnemy", "EarthEnemy", "AirEnemy"]);
             opponent = unitFactory.Create(opponentString);
 
-            while (player.IsAlive && opponent.IsAlive)
-            {
-                Console.Clear();
-                string header =  $"{player.Name}: {player.CurrentHealth}hp \n{opponent.Name}: {opponent.CurrentHealth}hp \n\nChoose your attack!";
-                string playerAttackString = GameConsole.SelectOptions(header, ["Light", "Heavy", "Ranged"]);
-                IAttack playerAttack = attackFactory.Create(playerAttackString);
-                player.Attack(playerAttack, opponent);
+            // Start player and opponent tasks
+            var playerTask = Task.Run(() => PlayerTurn());
+            var opponentTask = Task.Run(() => OpponentTurn());
 
-                if(!opponent.IsAlive) break;
-
-                Thread.Sleep(1000);
-
-                IAttack enemyAttack = randomAttackFactory.Create();
-                opponent.Attack(enemyAttack, player);
-
-                if(!player.IsAlive) break;
-
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
+            await Task.WhenAny(playerTask, opponentTask);
 
             if (player.IsAlive)
                 Console.WriteLine(player.Name + " wins!");
             else
                 Console.WriteLine(opponent.Name + " wins!");
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+        }
+
+        private void PlayerTurn()
+        {
+            while (true)
+            {
+                lock (lockObject)
+                {
+                    if (!player.IsAlive || !opponent.IsAlive) break;
+
+                    string playerAttackString = GameConsole.SelectOptions(GameConsole.GetFightHeader(player, opponent), ["Light", "Heavy", "Ranged"]);
+                    IAttack playerAttack = attackFactory.Create(playerAttackString);
+                    player.Attack(playerAttack, opponent);
+                }
+
+                Thread.Sleep(2000);
+            }
+        }
+
+        private void OpponentTurn()
+        {
+            while (true)
+            {
+                lock (lockObject)
+                {
+                    if (!player.IsAlive || !opponent.IsAlive) break;
+
+                    IAttack enemyAttack = randomAttackFactory.Create();
+                    opponent.Attack(enemyAttack, player);
+                }
+
+                Thread.Sleep(2000);
+            }
         }
     }
 }
