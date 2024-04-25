@@ -2,8 +2,8 @@ namespace RPG_GameLogic.Elements
 {
     public static class Element
     {
-        public static float BadAttackMultiplier { get; } = 0.5f;
-        public static float GoodAttackMultiplier { get; } = 2.0f;
+        public static float BadAttackMultiplier { get; } = 0.8f;
+        public static float GoodAttackMultiplier { get; } = 1.2f;
 
         public static float GetMultiplier(ElementType attacker, ElementType defender)
         {

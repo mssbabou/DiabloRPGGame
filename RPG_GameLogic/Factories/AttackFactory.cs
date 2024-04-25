@@ -12,7 +12,7 @@ namespace RPG_GameLogic.Factories
     {
         public IAttack Create(string type)
         {
-            switch (type)
+            switch (type.ToLower())
             {
                 case "light":
                     return new LightAttack();

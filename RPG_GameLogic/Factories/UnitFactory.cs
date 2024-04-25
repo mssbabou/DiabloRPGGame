@@ -12,7 +12,7 @@ namespace RPG_GameLogic.Factories
     {
         public IUnit Create(string type)
         {
-            switch (type)
+            switch (type.ToLower())
             {
                 case "fireenemy":
                     return new Enemy() {Type = Elements.ElementType.Fire};

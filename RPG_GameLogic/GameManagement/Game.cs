@@ -32,15 +32,16 @@ namespace RPG_GameLogic.GameManagement
 
         public void Start()
         {
-            Console.WriteLine("Choose your opponent!");
-            opponent = GameConsole.GetFactoryType(unitFactory);
-
             Console.Clear();
-            Console.WriteLine(player.Name + " vs " + opponent.Name);
+            string opponentString = GameConsole.SelectOptions("Choose your opponent!", ["FireEnemy", "WaterEnemy", "EarthEnemy", "AirEnemy"]);
+            opponent = unitFactory.Create(opponentString);
+
             while (player.IsAlive && opponent.IsAlive)
             {
-                Console.WriteLine("Choose your attack!");
-                IAttack playerAttack = GameConsole.GetFactoryType(attackFactory);
+                Console.Clear();
+                string header =  $"{player.Name}: {player.CurrentHealth}hp \n{opponent.Name}: {opponent.CurrentHealth}hp \n\nChoose your attack!";
+                string playerAttackString = GameConsole.SelectOptions(header, ["Light", "Heavy", "Ranged"]);
+                IAttack playerAttack = attackFactory.Create(playerAttackString);
                 player.Attack(playerAttack, opponent);
 
                 if(!opponent.IsAlive) break;
@@ -52,7 +53,8 @@ namespace RPG_GameLogic.GameManagement
 
                 if(!player.IsAlive) break;
 
-                Thread.Sleep(1000);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
 
             if (player.IsAlive)
