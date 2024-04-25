@@ -15,13 +15,13 @@ namespace RPG_GameLogic.Factories
             switch (type)
             {
                 case "fireenemy":
-                    return new Enemy(){Type = Elements.ElementType.Fire};
+                    return new Enemy() {Type = Elements.ElementType.Fire};
                 case "waterenemy":
-                    return new Enemy(){Type = Elements.ElementType.Water};
+                    return new Enemy() {Type = Elements.ElementType.Water};
                 case "earthenemy":
-                    return new Enemy(){Type = Elements.ElementType.Earth};
+                    return new Enemy() {Type = Elements.ElementType.Earth};
                 case "airenemy":
-                    return new Enemy(){Type = Elements.ElementType.Air};
+                    return new Enemy() {Type = Elements.ElementType.Air};
                 default:
                     throw new ArgumentException("Invalid unit type");
             }

@@ -14,8 +14,8 @@ namespace RPG_GameLogic.Attacks
         public virtual void Attack(IUnit source, IUnit target)
         {
             int damage = (int)CalculateDamage(Element.GetMultiplier(source.Type, target.Type));
-            target.TakeDamage(damage);
             Console.WriteLine($"{source.Name} attacked {target.Name} for {damage} damage.");
+            target.TakeDamage(damage);
         }
 
         public virtual float CalculateDamage(float multiplier = 0)

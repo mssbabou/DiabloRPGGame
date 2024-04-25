@@ -18,6 +18,7 @@ namespace RPG_GameLogic.Units
         public virtual int MaxHealth => 100;
 
         public virtual int CurrentHealth { get; set; }
+        public virtual bool IsAlive { get; set; } = true;
 
         public BaseUnit()
         {
@@ -32,12 +33,13 @@ namespace RPG_GameLogic.Units
         public virtual void Die()
         {
             Console.WriteLine($"{Name} has died.");
+            IsAlive = false;
         }
 
         public virtual void TakeDamage(int damage)
         {
             CurrentHealth -= damage;
-            
+
             if (CurrentHealth <= 0)
                 Die();
         }

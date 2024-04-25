@@ -11,7 +11,7 @@ namespace RPG_GameLogic.GameManagement
             Console.WriteLine("Welcome to the game!");
         }
 
-        public static T GetFactoryInput<T>(IFactory<T> factory)
+        public static T GetFactoryType<T>(IFactory<T> factory)
         {
             while(true)
             {

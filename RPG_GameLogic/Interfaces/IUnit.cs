@@ -15,6 +15,7 @@ namespace RPG_GameLogic.Interfaces
         string Description { get; }
         int MaxHealth { get; }
         int CurrentHealth { get; set; }
+        bool IsAlive { get; set; }
         void TakeDamage(int damage);
         void Attack(IAttack attack, IUnit unit);
         void Die();

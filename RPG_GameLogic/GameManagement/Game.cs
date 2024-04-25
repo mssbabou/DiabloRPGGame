@@ -33,21 +33,32 @@ namespace RPG_GameLogic.GameManagement
         public void Start()
         {
             Console.WriteLine("Choose your opponent!");
-            opponent = GameConsole.GetFactoryInput(unitFactory);
+            opponent = GameConsole.GetFactoryType(unitFactory);
 
             Console.Clear();
             Console.WriteLine(player.Name + " vs " + opponent.Name);
-            while (true)
+            while (player.IsAlive && opponent.IsAlive)
             {
                 Console.WriteLine("Choose your attack!");
-                IAttack playerAttack = GameConsole.GetFactoryInput(attackFactory);
+                IAttack playerAttack = GameConsole.GetFactoryType(attackFactory);
                 player.Attack(playerAttack, opponent);
+
+                if(!opponent.IsAlive) break;
 
                 Thread.Sleep(1000);
 
                 IAttack enemyAttack = randomAttackFactory.Create();
                 opponent.Attack(enemyAttack, player);
+
+                if(!player.IsAlive) break;
+
+                Thread.Sleep(1000);
             }
+
+            if (player.IsAlive)
+                Console.WriteLine(player.Name + " wins!");
+            else
+                Console.WriteLine(opponent.Name + " wins!");
         }
     }
 }
