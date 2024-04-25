@@ -13,7 +13,7 @@ namespace RPG_GameLogic.Attacks
 
         public virtual void Attack(IUnit source, IUnit target)
         {
-            int damage = (int)CalculateDamage(Element.GetMultiplier(source.Type, target.Type));
+            int damage = (int)CalculateDamage(Elements.Elements.GetMultiplier(source.Type, target.Type));
             Console.WriteLine($"{source.Name} attacked {target.Name} for {damage} damage.");
             target.TakeDamage(damage);
         }

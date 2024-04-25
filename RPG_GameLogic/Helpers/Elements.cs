@@ -1,6 +1,6 @@
 namespace RPG_GameLogic.Elements
 {
-    public static class Element
+    public static class Elements
     {
         public static float BadAttackMultiplier { get; } = 0.8f;
         public static float GoodAttackMultiplier { get; } = 1.2f;

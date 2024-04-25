@@ -12,8 +12,8 @@ namespace RPG_GameLogic.GameManagement
         private IUnit player;
         private IUnit opponent;
 
-        private UnitFactory unitFactory;
-        private AttackFactory attackFactory;
+        private IFactory<IUnit> unitFactory;
+        private IFactory<IAttack> attackFactory;
         private RandomAttackFactory randomAttackFactory;
 
         private readonly object lockObject = new();

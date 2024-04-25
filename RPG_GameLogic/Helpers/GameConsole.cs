@@ -69,12 +69,6 @@ namespace RPG_GameLogic.GameManagement
             }
         }
 
-        public static void UpdateHealth(IUnit player, IUnit opponent)
-        {
-            Console.WriteLine($"{player.Name} Health: : {player.CurrentHealth}");
-            Console.WriteLine($"{opponent.Name} Health: {opponent.CurrentHealth}");
-        }
-
         public static string GetFightHeader(IUnit player, IUnit opponent)
         {
             return $"{player.Name}: {player.CurrentHealth}hp \n{opponent.Name}: {opponent.CurrentHealth}hp \n\nChoose your attack!";
