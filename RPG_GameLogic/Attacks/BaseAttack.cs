@@ -21,7 +21,7 @@ namespace RPG_GameLogic.Attacks
         public virtual float CalculateDamage(float multiplier = 0)
         {
             bool crit = rnd.NextSingle() < CritChance;
-            return crit ? BaseDamage * CritMultiplier * multiplier: BaseDamage * multiplier;
+            return crit ? BaseDamage * CritMultiplier * multiplier : BaseDamage * multiplier;
         }
     }
 }

@@ -23,27 +23,11 @@ namespace RPG_GameLogic.GameManagement
             Console.ReadKey();
         }
 
-        public static T GetFactoryType<T>(IFactory<T> factory)
-        {
-            while (true)
-            {
-                Console.Write($"Enter: ");
-                string? type = Console.ReadLine();
-                try
-                {
-                    return factory.Create(type);
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine("Invalid type");
-                }
-            }
-        }
-
         public static string SelectOptions(string header, string[] options)
         {
             Console.Clear();
             Console.WriteLine(header + " (Select With ArrowKeys)");
+
             for (int i = 0; i < options.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {options[i]}");
