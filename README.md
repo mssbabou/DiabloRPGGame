@@ -29,11 +29,3 @@ Once you have .NET installed, you can run the game using the following command:
 ```sh
 dotnet run --project RPG_Game/RPG_Game.csproj
 ```
-
-## Contributing
-
-We welcome contributions! Please see our contributing guidelines for more details.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
